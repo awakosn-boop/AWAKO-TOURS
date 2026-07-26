@@ -1,13 +1,18 @@
 'use client';
+
+import { useState } from 'react';
 import SplashScreen from '@/components/SplashScreen';
 import RealSenegalMap from '@/components/RealSenegalMap';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function HomePage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   // Fonction de défilement fluide vers la carte
   const scrollToPoles = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    setIsMenuOpen(false); // Ferme le menu mobile lors du clic
     const element = document.getElementById('poles');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -21,7 +26,7 @@ export default function HomePage() {
 
       {/* Barre de navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 h-36 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-28 md:h-36 flex items-center justify-between">
           
           {/* Logo */}
           <Link href="/" className="flex items-center h-full py-2 group">
@@ -31,11 +36,11 @@ export default function HomePage() {
               width={500} 
               height={180} 
               priority
-              className="h-full w-auto object-contain max-h-32 transition-transform duration-300 group-hover:scale-105"
+              className="h-full w-auto object-contain max-h-24 md:max-h-32 transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
-          {/* Menu de Navigation */}
+          {/* Menu de Navigation Ordinateur */}
           <div className="hidden md:flex items-center gap-8 text-base font-medium text-gray-600">
             <Link href="/" className="text-orange-500 font-bold border-b-2 border-orange-500 pb-1">Accueil</Link>
             <Link href="/explorer" className="hover:text-orange-500 transition duration-200">Découvrir</Link>
@@ -50,7 +55,37 @@ export default function HomePage() {
           >
             Connexion (V1)
           </button>
+
+          {/* Bouton Hamburger pour Téléphone */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 text-gray-700 text-3xl focus:outline-none"
+            aria-label="Menu"
+          >
+            {isMenuOpen ? '✕' : '☰'}
+          </button>
         </div>
+
+        {/* Menu Déroulant Mobile */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white border-b border-gray-100 px-6 py-4 flex flex-col space-y-4 text-base font-medium text-gray-700 shadow-lg">
+            <Link href="/" onClick={() => setIsMenuOpen(false)} className="text-orange-500 font-bold">
+              Accueil
+            </Link>
+            <Link href="/explorer" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
+              Découvrir
+            </Link>
+            <a href="#poles" onClick={scrollToPoles} className="hover:text-orange-500 transition">
+              Pôles touristiques
+            </a>
+            <Link href="/categories" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
+              Catégories
+            </Link>
+            <Link href="/a-propos" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
+              À propos
+            </Link>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
