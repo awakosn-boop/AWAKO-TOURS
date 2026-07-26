@@ -1,6 +1,8 @@
 'use client';
+
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Extrait structuré des acteurs issus de votre étude Excel
 interface Acteur {
@@ -44,6 +46,7 @@ export default function CategoriesPage() {
   const [selectedNature, setSelectedNature] = useState<'Privé' | 'Public'>('Privé');
   const [selectedPole, setSelectedPole] = useState<string>('Tous les pôles');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   // Filtrage dynamique
   const filteredActeurs = useMemo(() => {
@@ -57,8 +60,65 @@ export default function CategoriesPage() {
   }, [selectedNature, selectedPole, searchQuery]);
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-28 pb-20">
+    <div className="min-h-screen bg-slate-50 pt-36 md:pt-44 pb-20">
       
+      {/* BARRE DE NAVIGATION AVEC LOGO CENTRÉ & MENU RESPONSIVE */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 h-28 md:h-36 flex flex-col justify-between items-center py-2 relative">
+          
+          {/* Logo AWAKO TOURS (Même taille que sur l'accueil, centré) */}
+          <Link href="/" className="flex items-center justify-center h-20 md:h-24">
+            <Image 
+              src="/logo-transparent.png" 
+              alt="AWAKO TOURS Logo" 
+              width={500} 
+              height={180} 
+              priority
+              className="h-full w-auto object-contain max-h-24 md:max-h-32 transition-transform duration-300 hover:scale-105"
+            />
+          </Link>
+
+          {/* Menu de Navigation Ordinateur */}
+          <div className="hidden md:flex items-center gap-8 text-base font-medium text-gray-600 pb-2">
+            <Link href="/" className="hover:text-orange-500 transition duration-200">Accueil</Link>
+            <Link href="/explorer" className="hover:text-orange-500 transition duration-200">Découvrir</Link>
+            <Link href="/#poles" className="hover:text-orange-500 transition duration-200">Pôles touristiques</Link>
+            <Link href="/categories" className="text-orange-500 font-bold border-b-2 border-orange-500 pb-1">Catégories</Link>
+            <Link href="/a-propos" className="hover:text-orange-500 transition duration-200">À propos</Link>
+          </div>
+
+          {/* Bouton Hamburger Téléphone */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden absolute right-6 top-6 p-2 text-gray-700 text-3xl focus:outline-none"
+            aria-label="Menu"
+          >
+            {isMenuOpen ? '✕' : '☰'}
+          </button>
+        </div>
+
+        {/* Menu Déroulant Mobile */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white border-b border-gray-100 px-6 py-4 flex flex-col space-y-4 text-base font-medium text-gray-700 shadow-lg">
+            <Link href="/" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
+              Accueil
+            </Link>
+            <Link href="/explorer" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
+              Découvrir
+            </Link>
+            <Link href="/#poles" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
+              Pôles touristiques
+            </Link>
+            <Link href="/categories" onClick={() => setIsMenuOpen(false)} className="text-orange-500 font-bold">
+              Catégories
+            </Link>
+            <Link href="/a-propos" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
+              À propos
+            </Link>
+          </div>
+        )}
+      </nav>
+
       {/* EN-TÊTE DE LA PAGE */}
       <div className="bg-blue-950 text-white py-12 px-6 mb-10 shadow-lg">
         <div className="max-w-7xl mx-auto text-center">
