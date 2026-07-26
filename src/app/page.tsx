@@ -43,10 +43,9 @@ export default function HomePage() {
           {/* Menu de Navigation Ordinateur */}
           <div className="hidden md:flex items-center gap-8 text-base font-medium text-gray-600">
             <Link href="/" className="text-orange-500 font-bold border-b-2 border-orange-500 pb-1">Accueil</Link>
-            <Link href="/explorer" className="hover:text-orange-500 transition duration-200">Découvrir</Link>
+            <a href="#poles" onClick={scrollToPoles} className="hover:text-orange-500 transition duration-200">Explorer la carte</a>
             <a href="#poles" onClick={scrollToPoles} className="hover:text-orange-500 transition duration-200">Pôles touristiques</a>
             <Link href="/categories" className="hover:text-orange-500 transition duration-200">Catégories</Link>
-            <Link href="/a-propos" className="hover:text-orange-500 transition duration-200">À propos</Link>
           </div>
 
           <button
@@ -72,17 +71,14 @@ export default function HomePage() {
             <Link href="/" onClick={() => setIsMenuOpen(false)} className="text-orange-500 font-bold">
               Accueil
             </Link>
-            <Link href="/explorer" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
-              Découvrir
-            </Link>
+            <a href="#poles" onClick={scrollToPoles} className="hover:text-orange-500 transition">
+              Explorer la carte
+            </a>
             <a href="#poles" onClick={scrollToPoles} className="hover:text-orange-500 transition">
               Pôles touristiques
             </a>
             <Link href="/categories" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
               Catégories
-            </Link>
-            <Link href="/a-propos" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
-              À propos
             </Link>
           </div>
         )}
@@ -109,7 +105,7 @@ export default function HomePage() {
           </h1>
           
           <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed drop-shadow">
-            Explorez les richesses touristiques du Sénégal à travers nos huit pôles touristiques.
+            Explorez les richesses touristiques du Sénégal à travers nos différents pôles touristiques.
           </p>
           
           <a

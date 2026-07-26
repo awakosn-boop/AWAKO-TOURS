@@ -148,7 +148,7 @@ export default function CategoriesPage() {
   return (
     <div className="min-h-screen bg-slate-50 pt-36 md:pt-44 pb-20">
       
-      {/* BARRE DE NAVIGATION AVEC LOGO CENTRÉ & MENU RESPONSIVE */}
+      {/* BARRE DE NAVIGATION */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 h-28 md:h-36 flex flex-col justify-between items-center py-2 relative">
           
@@ -167,10 +167,9 @@ export default function CategoriesPage() {
           {/* Menu Ordinateur */}
           <div className="hidden md:flex items-center gap-8 text-base font-medium text-gray-600 pb-2">
             <Link href="/" className="hover:text-orange-500 transition duration-200">Accueil</Link>
-            <Link href="/explorer" className="hover:text-orange-500 transition duration-200">Découvrir</Link>
-            <Link href="/#poles" className="hover:text-orange-500 transition duration-200">Pôles touristiques</Link>
+            <Link href="/#carte" className="hover:text-orange-500 transition duration-200">Explorer la carte</Link>
+            <Link href="/#carte" className="hover:text-orange-500 transition duration-200">Pôles touristiques</Link>
             <Link href="/categories" className="text-orange-500 font-bold border-b-2 border-orange-500 pb-1">Catégories</Link>
-            <Link href="/a-propos" className="hover:text-orange-500 transition duration-200">À propos</Link>
           </div>
 
           {/* Bouton Hamburger Mobile */}
@@ -187,10 +186,9 @@ export default function CategoriesPage() {
         {isMenuOpen && (
           <div className="md:hidden bg-white border-b border-gray-100 px-6 py-4 flex flex-col space-y-4 text-base font-medium text-gray-700 shadow-lg">
             <Link href="/" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">Accueil</Link>
-            <Link href="/explorer" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">Découvrir</Link>
-            <Link href="/#poles" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">Pôles touristiques</Link>
+            <Link href="/#carte" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">Explorer la carte</Link>
+            <Link href="/#carte" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">Pôles touristiques</Link>
             <Link href="/categories" onClick={() => setIsMenuOpen(false)} className="text-orange-500 font-bold">Catégories</Link>
-            <Link href="/a-propos" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">À propos</Link>
           </div>
         )}
       </nav>
