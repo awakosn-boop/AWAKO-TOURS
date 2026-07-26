@@ -4,7 +4,6 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-// Extrait structuré des acteurs issus de votre étude Excel
 interface Acteur {
   id: number;
   nom: string;
@@ -12,34 +11,121 @@ interface Acteur {
   type: string;
   pole: string;
   anciennete: string;
-  outils: string[];
 }
 
 const DATA_ACTEURS: Acteur[] = [
-  // EXEMPLES SECTEUR PUBLIC & PARAPUBLIC
-  { id: 1, nom: "ASPT - Agence de Promotion Touristique", nature: "Public", type: "Agence de promotion", pole: "Pôle Dakar", anciennete: "Plus de 6 ans", outils: ["Site web", "Facebook", "Instagram", "E-mail"] },
-  { id: 2, nom: "Ministère du Tourisme & de l'Artisanat", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle Dakar", anciennete: "Plus de 6 ans", outils: ["Site web", "E-mail professionnel"] },
-  { id: 3, nom: "Parc National du Djoudj", nature: "Public", type: "Site touristique / Parc national", pole: "Pôle Nord (Saint-Louis)", anciennete: "Plus de 6 ans", outils: ["Facebook", "E-mail"] },
-  { id: 4, nom: "Réserve Naturelle de Palmarin", nature: "Public", type: "Site touristique / Parc national", pole: "Pôle Centre (Sine Saloum)", anciennete: "Plus de 6 ans", outils: ["WhatsApp Business", "Facebook"] },
-  
-  // EXEMPLES SECTEUR PRIVÉ
-  { id: 5, nom: "Guide Touristique Indépendant Dakar", nature: "Privé", type: "Guide touristique", pole: "Pôle Dakar", anciennete: "Plus de 6 ans", outils: ["WhatsApp Business", "Instagram", "Facebook"] },
-  { id: 6, nom: "Hôtel & Resort Petite Côte", nature: "Privé", type: "Hôtel", pole: "Pôle Thiès (Saly / Mbour)", anciennete: "Plus de 6 ans", outils: ["Plateforme de réservation", "Site web", "Instagram"] },
-  { id: 7, nom: "Ecolodge du Saloum", nature: "Privé", type: "Campement / Ecolodge", pole: "Pôle Centre (Sine Saloum)", anciennete: "3 à 6 ans", outils: ["Site web", "WhatsApp Business", "Instagram"] },
-  { id: 8, nom: "Casamance Evasion - Agence de Voyage", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle Sud (Casamance)", anciennete: "Plus de 6 ans", outils: ["Site web", "Facebook", "WhatsApp"] },
-  { id: 9, nom: "Startup Travel Tech Sénégal", nature: "Privé", type: "Startup en développement", pole: "Pôle Dakar", anciennete: "1 à 3 ans", outils: ["Plateforme digitale", "TikTok", "Instagram"] },
-  { id: 10, nom: "Auberge & Table D'hôtes Saint-Louis", nature: "Privé", type: "Auberge / Maison d'hôtes", pole: "Pôle Nord (Saint-Louis)", anciennete: "Plus de 6 ans", outils: ["Instagram", "WhatsApp Business"] },
+  { id: 1, nom: "Structure publique du tourisme 1", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 2, nom: "Guide touristique 1", nature: "Privé", type: "Guide touristique", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 3, nom: "Structure publique du tourisme 2", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 4, nom: "Hôtel 1", nature: "Privé", type: "Hôtel", pole: "Pôle THIES (Thies, Diourbel)", anciennete: "Plus de 6 ans" },
+  { id: 5, nom: "Agence de voyage / Tour opérateur 1", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 6, nom: "Structure publique du tourisme 3", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 7, nom: "Hôtel 2", nature: "Privé", type: "Hôtel", pole: "Pôle THIES (Thies, Diourbel)", anciennete: "Plus de 6 ans" },
+  { id: 8, nom: "Structure publique du tourisme 4", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "3 à 6 ans" },
+  { id: 9, nom: "Guide touristique 2", nature: "Privé", type: "Guide touristique", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 10, nom: "Service de conciergerie d'affaires DMC 1", nature: "Privé", type: "Service de conciergerie d'affaires DMC", pole: "Pôle DAKAR (Dakar)", anciennete: "1 à 3 ans" },
+  { id: 11, nom: "Startup en développement touristique 1", nature: "Privé", type: "Startup en développement touristique", pole: "Pôle DAKAR (Dakar)", anciennete: "Moins d'un an" },
+  { id: 12, nom: "Guide touristique 3", nature: "Privé", type: "Guide touristique", pole: "Pôle DAKAR (Dakar)", anciennete: "3 à 6 ans" },
+  { id: 13, nom: "Auberge / Maison d’hôtes / Résidence 1", nature: "Privé", type: "Auberge / Maison d’hôtes / Résidence", pole: "Pôle THIES (Thies, Diourbel)", anciennete: "3 à 6 ans" },
+  { id: 14, nom: "Agence de voyage / Tour opérateur 2", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 15, nom: "Label évènementiel de Culture 1", nature: "Privé", type: "Label évènementiel de Culture", pole: "Pôle DAKAR (Dakar)", anciennete: "3 à 6 ans" },
+  { id: 16, nom: "Guide touristique 4", nature: "Privé", type: "Guide touristique", pole: "Pôle DAKAR (Dakar)", anciennete: "3 à 6 ans" },
+  { id: 17, nom: "Hôtel 3", nature: "Privé", type: "Hôtel", pole: "Pôle THIES (Thies, Diourbel)", anciennete: "Plus de 6 ans" },
+  { id: 18, nom: "Hôtel 4", nature: "Privé", type: "Hôtel", pole: "Pôle THIES (Thies, Diourbel)", anciennete: "3 à 6 ans" },
+  { id: 19, nom: "Hôtel 5", nature: "Privé", type: "Hôtel", pole: "Pôle THIES (Thies, Diourbel)", anciennete: "Plus de 6 ans" },
+  { id: 20, nom: "Hôtel 6", nature: "Privé", type: "Hôtel", pole: "Pôle THIES (Thies, Diourbel)", anciennete: "Plus de 6 ans" },
+  { id: 21, nom: "Plateforme digitale 1", nature: "Privé", type: "Plateforme digitale", pole: "Pôle DAKAR (Dakar)", anciennete: "3 à 6 ans" },
+  { id: 22, nom: "Hôtel 7", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 23, nom: "Structure publique du tourisme 5", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle NORD (Saint-Louis, Matam, Louga)", anciennete: "3 à 6 ans" },
+  { id: 24, nom: "Auberge / Maison d’hôtes / Résidence 2", nature: "Privé", type: "Auberge / Maison d’hôtes / Résidence", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 25, nom: "Hôtel 8", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 26, nom: "Hôtel 9", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 27, nom: "Campement / Ecolodge 1", nature: "Privé", type: "Campement / Ecolodge", pole: "Pôle NORD (Saint-Louis, Matam, Louga)", anciennete: "Plus de 6 ans" },
+  { id: 28, nom: "Hôtel 10", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 29, nom: "Hôtel 11", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 30, nom: "Agence de voyage / Tour opérateur 3", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 31, nom: "Agence de voyage / Tour opérateur 4", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 32, nom: "Guide touristique 5", nature: "Privé", type: "Guide touristique", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 33, nom: "Agence de voyage / Tour opérateur 5", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 34, nom: "Campement / Ecolodge 2", nature: "Privé", type: "Campement / Ecolodge", pole: "Pôle CENTRE ( Fatick, Kaolack, Kaffrine)", anciennete: "Plus de 6 ans" },
+  { id: 35, nom: "Agence de consulting touristique 1", nature: "Privé", type: "Agence de consulting touristique", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 36, nom: "Site touristique / Parc national / Réserve naturelle 1", nature: "Public", type: "Site touristique / Parc national / Réserve naturelle", pole: "Pôle NORD (Saint-Louis, Matam, Louga)", anciennete: "Plus de 6 ans" },
+  { id: 37, nom: "Réceptif, agence de voyage, locations de véhicules 1", nature: "Privé", type: "Réceptif, agence de voyage, locations de véhicules", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 38, nom: "Institution de formation 1", nature: "Public", type: "Institution de formation", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 39, nom: "Guide touristique 6", nature: "Privé", type: "Guide touristique", pole: "Pôle CENTRE ( Fatick, Kaolack, Kaffrine)", anciennete: "Plus de 6 ans" },
+  { id: 40, nom: "Hôtel 12", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "3 à 6 ans" },
+  { id: 41, nom: "Hôtel 13", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 42, nom: "Agence de voyage / Tour opérateur 6", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 43, nom: "Agence de voyage / Tour opérateur 7", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 44, nom: "Agence sénégalaise de promotion touristique 1", nature: "Public", type: "Agence sénégalaise de promotion touristique", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 45, nom: "Auberge / Maison d’hôtes / Résidence 3", nature: "Privé", type: "Auberge / Maison d’hôtes / Résidence", pole: "Pôle NORD (Saint-Louis, Matam, Louga)", anciennete: "Plus de 6 ans" },
+  { id: 46, nom: "Hôtel 14", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 47, nom: "Hôtel 15", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 48, nom: "Structure publique du tourisme 6", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 49, nom: "Institution de formation 2", nature: "Public", type: "Institution de formation", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 50, nom: "Laboratoire 1", nature: "Public", type: "Laboratoire", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 51, nom: "Comité d'Organisation des Jeux Olympiques de la Jeunesse 1", nature: "Public", type: "Comité d'Organisation des Jeux Olympiques de la Jeunesse", pole: "Pôle DAKAR (Dakar)", anciennete: "1 à 3 ans" },
+  { id: 52, nom: "Hôtel 16", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 53, nom: "Media touristique 1", nature: "Public", type: "Media touristique", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 54, nom: "Structure publique du tourisme 7", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 55, nom: "Structure publique du tourisme 8", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 56, nom: "Site touristique / Parc national / Réserve naturelle 2", nature: "Public", type: "Site touristique / Parc national / Réserve naturelle", pole: "Pôle CENTRE ( Fatick, Kaolack, Kaffrine)", anciennete: "Plus de 6 ans" },
+  { id: 57, nom: "Hôtel 17", nature: "Privé", type: "Hôtel", pole: "Pôle SUD-EST (Kedougou, Tambacounda)", anciennete: "Plus de 6 ans" },
+  { id: 58, nom: "Structure publique du tourisme 9", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle NORD-EST (Matam)", anciennete: "1 à 3 ans" },
+  { id: 59, nom: "Recherches sur le Tourisme fluvial 1", nature: "Public", type: "Recherches sur le Tourisme fluvial", pole: "Pôle NORD-EST (Matam)", anciennete: "Plus de 6 ans" },
+  { id: 60, nom: "Guide touristique 7", nature: "Privé", type: "Guide touristique", pole: "Pôle SUD-EST (Kedougou, Tambacounda)", anciennete: "Plus de 6 ans" },
+  { id: 61, nom: "Guide touristique 8", nature: "Privé", type: "Guide touristique", pole: "Pôle SUD-EST (Kedougou, Tambacounda)", anciennete: "Plus de 6 ans" },
+  { id: 62, nom: "Campement / Ecolodge 3", nature: "Privé", type: "Campement / Ecolodge", pole: "Pôle SUD-EST (Kedougou, Tambacounda)", anciennete: "Plus de 6 ans" },
+  { id: 63, nom: "Agence de voyage / Tour opérateur 8", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 64, nom: "Hôtel 18", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 65, nom: "Hôtel 19", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 66, nom: "Structure publique du tourisme 10", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle NORD (Saint-Louis, Matam, Louga)", anciennete: "Plus de 6 ans" },
+  { id: 67, nom: "Site touristique / Parc national / Réserve naturelle 3", nature: "Public", type: "Site touristique / Parc national / Réserve naturelle", pole: "Pôle NORD (Saint-Louis, Matam, Louga)", anciennete: "Plus de 6 ans" },
+  { id: 68, nom: "Hôtel 20", nature: "Privé", type: "Hôtel", pole: "Pôle NORD (Saint-Louis, Matam, Louga)", anciennete: "Plus de 6 ans" },
+  { id: 69, nom: "Hôtel 21", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 70, nom: "Hôtel 22", nature: "Privé", type: "Hôtel", pole: "Pôle THIES (Thies, Diourbel)", anciennete: "Plus de 6 ans" },
+  { id: 71, nom: "Restaurant 1", nature: "Privé", type: "Restaurant", pole: "Pôle THIES (Thies, Diourbel)", anciennete: "Plus de 6 ans" },
+  { id: 72, nom: "Structure publique du tourisme 11", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 73, nom: "Hôtel 23", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 74, nom: "Structure publique du tourisme 12", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 75, nom: "Structure publique du tourisme 13", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 76, nom: "Structure publique du tourisme 14", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 77, nom: "Structure publique du tourisme 15", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 78, nom: "Structure publique du tourisme 16", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 79, nom: "Structure publique du tourisme 17", nature: "Public", type: "Structure publique du tourisme", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 80, nom: "Site touristique / Parc national / Réserve naturelle 4", nature: "Public", type: "Site touristique / Parc national / Réserve naturelle", pole: "Pôle CENTRE ( Fatick, Kaolack, Kaffrine)", anciennete: "Plus de 6 ans" },
+  { id: 81, nom: "Hôtel 24", nature: "Privé", type: "Hôtel", pole: "Pôle SUD (Ziguinchor, Sedhiou, Kolda)", anciennete: "Plus de 6 ans" },
+  { id: 82, nom: "Site touristique / Parc national / Réserve naturelle 5", nature: "Public", type: "Site touristique / Parc national / Réserve naturelle", pole: "Pôle SUD (Ziguinchor, Sedhiou, Kolda)", anciennete: "Plus de 6 ans" },
+  { id: 83, nom: "Hôtel 25", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 84, nom: "Hôtel 26", nature: "Privé", type: "Hôtel", pole: "Pôle THIES (Thies)", anciennete: "3 à 6 ans" },
+  { id: 85, nom: "Auberge / Maison d’hôtes / Résidence 4", nature: "Privé", type: "Auberge / Maison d’hôtes / Résidence", pole: "Pôle THIES (Thies)", anciennete: "1 à 3 ans" },
+  { id: 86, nom: "Auberge / Maison d’hôtes / Résidence 5", nature: "Privé", type: "Auberge / Maison d’hôtes / Résidence", pole: "Pôle THIES (Thies)", anciennete: "Plus de 6 ans" },
+  { id: 87, nom: "Hôtel 27", nature: "Privé", type: "Hôtel", pole: "Pôle THIES (Thies)", anciennete: "3 à 6 ans" },
+  { id: 88, nom: "Hôtel 28", nature: "Privé", type: "Hôtel", pole: "Pôle THIES (Thies)", anciennete: "Plus de 6 ans" },
+  { id: 89, nom: "Agence de voyage / Tour opérateur 9", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle SUD (Ziguinchor, Sedhiou, Kolda)", anciennete: "Plus de 6 ans" },
+  { id: 90, nom: "Guide touristique 9", nature: "Privé", type: "Guide touristique", pole: "Pôle SUD (Ziguinchor, Sedhiou, Kolda)", anciennete: "Plus de 6 ans" },
+  { id: 91, nom: "Hôtel 29", nature: "Privé", type: "Hôtel", pole: "Pôle SUD (Ziguinchor, Sedhiou, Kolda)", anciennete: "Plus de 6 ans" },
+  { id: 92, nom: "Hôtel 30", nature: "Privé", type: "Hôtel", pole: "Pôle SUD (Ziguinchor, Sedhiou, Kolda)", anciennete: "Plus de 6 ans" },
+  { id: 93, nom: "Hôtel 31", nature: "Privé", type: "Hôtel", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 94, nom: "Hôtel 32", nature: "Privé", type: "Hôtel", pole: "Pôle NORD (Saint-Louis, Matam, Louga)", anciennete: "Plus de 6 ans" },
+  { id: 95, nom: "Hôtel 33", nature: "Privé", type: "Hôtel", pole: "Pôle SUD-EST (Kedougou, Tambacounda)", anciennete: "Plus de 6 ans" },
+  { id: 96, nom: "Agence de voyage / Tour opérateur 10", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 97, nom: "Agence de voyage / Tour opérateur 11", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 98, nom: "Agence de voyage / Tour opérateur 12", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle DAKAR (Dakar)", anciennete: "Plus de 6 ans" },
+  { id: 99, nom: "Agence de voyage / Tour opérateur 13", nature: "Privé", type: "Agence de voyage / Tour opérateur", pole: "Pôle CENTRE ( Fatick, Kaolack, Kaffrine)", anciennete: "Plus de 6 ans" },
+  { id: 100, nom: "Restaurant 2", nature: "Privé", type: "Restaurant", pole: "Pôle DAKAR (Dakar)", anciennete: "1 à 3 ans" },
+  { id: 101, nom: "Établissement Touristique 1", nature: "Privé", type: "Autre", pole: "Pôle SUD-EST (Kedougou, Tambacounda)", anciennete: "Plus de 6 ans" }
 ];
 
 const POLES_LIST = [
   "Tous les pôles",
-  "Pôle Dakar",
-  "Pôle Thiès (Saly / Mbour)",
-  "Pôle Nord (Saint-Louis)",
-  "Pôle Centre (Sine Saloum)",
-  "Pôle Sud (Casamance)",
-  "Pôle Sud-Est (Kédougou)",
-  "Pôle Nord-Est (Matam)",
+  "Pôle DAKAR (Dakar)",
+  "Pôle THIES (Thies, Diourbel)",
+  "Pôle NORD (Saint-Louis, Matam, Louga)",
+  "Pôle CENTRE ( Fatick, Kaolack, Kaffrine)",
+  "Pôle SUD (Ziguinchor, Sedhiou, Kolda)",
+  "Pôle SUD-EST (Kedougou, Tambacounda)",
+  "Pôle NORD-EST (Matam)"
 ];
 
 export default function CategoriesPage() {
@@ -52,7 +138,7 @@ export default function CategoriesPage() {
   const filteredActeurs = useMemo(() => {
     return DATA_ACTEURS.filter((item) => {
       const matchNature = item.nature === selectedNature;
-      const matchPole = selectedPole === 'Tous les pôles' || item.pole.includes(selectedPole.split(' ')[1]);
+      const matchPole = selectedPole === 'Tous les pôles' || item.pole === selectedPole;
       const matchSearch = item.nom.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           item.type.toLowerCase().includes(searchQuery.toLowerCase());
       return matchNature && matchPole && matchSearch;
@@ -66,7 +152,7 @@ export default function CategoriesPage() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 h-28 md:h-36 flex flex-col justify-between items-center py-2 relative">
           
-          {/* Logo AWAKO TOURS (Même taille que sur l'accueil, centré) */}
+          {/* Logo AWAKO TOURS */}
           <Link href="/" className="flex items-center justify-center h-20 md:h-24">
             <Image 
               src="/logo-transparent.png" 
@@ -78,7 +164,7 @@ export default function CategoriesPage() {
             />
           </Link>
 
-          {/* Menu de Navigation Ordinateur */}
+          {/* Menu Ordinateur */}
           <div className="hidden md:flex items-center gap-8 text-base font-medium text-gray-600 pb-2">
             <Link href="/" className="hover:text-orange-500 transition duration-200">Accueil</Link>
             <Link href="/explorer" className="hover:text-orange-500 transition duration-200">Découvrir</Link>
@@ -87,7 +173,7 @@ export default function CategoriesPage() {
             <Link href="/a-propos" className="hover:text-orange-500 transition duration-200">À propos</Link>
           </div>
 
-          {/* Bouton Hamburger Téléphone */}
+          {/* Bouton Hamburger Mobile */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden absolute right-6 top-6 p-2 text-gray-700 text-3xl focus:outline-none"
@@ -100,21 +186,11 @@ export default function CategoriesPage() {
         {/* Menu Déroulant Mobile */}
         {isMenuOpen && (
           <div className="md:hidden bg-white border-b border-gray-100 px-6 py-4 flex flex-col space-y-4 text-base font-medium text-gray-700 shadow-lg">
-            <Link href="/" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
-              Accueil
-            </Link>
-            <Link href="/explorer" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
-              Découvrir
-            </Link>
-            <Link href="/#poles" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
-              Pôles touristiques
-            </Link>
-            <Link href="/categories" onClick={() => setIsMenuOpen(false)} className="text-orange-500 font-bold">
-              Catégories
-            </Link>
-            <Link href="/a-propos" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
-              À propos
-            </Link>
+            <Link href="/" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">Accueil</Link>
+            <Link href="/explorer" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">Découvrir</Link>
+            <Link href="/#poles" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">Pôles touristiques</Link>
+            <Link href="/categories" onClick={() => setIsMenuOpen(false)} className="text-orange-500 font-bold">Catégories</Link>
+            <Link href="/a-propos" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">À propos</Link>
           </div>
         )}
       </nav>
@@ -123,13 +199,13 @@ export default function CategoriesPage() {
       <div className="bg-blue-950 text-white py-12 px-6 mb-10 shadow-lg">
         <div className="max-w-7xl mx-auto text-center">
           <span className="text-orange-400 font-bold text-xs uppercase tracking-widest bg-orange-500/20 px-3.5 py-1.5 rounded-full border border-orange-500/30">
-            Répertoire Officiel des Acteurs
+            Répertoire National du Tourisme Sénégalais
           </span>
           <h1 className="text-3xl md:text-5xl font-black mt-3">
-            Catégories du Tourisme Sénégalais
+            Acteurs & Établissements Touristiques
           </h1>
           <p className="text-gray-300 text-sm md:text-base mt-2 max-w-2xl mx-auto font-light">
-            Explorez les acteurs du tourisme recensés selon leur secteur d'activité et leur pôle géographique.
+            Découvrez le répertoire complet des 101 acteurs touristiques recensés à travers les différents pôles géographiques du Sénégal.
           </p>
         </div>
       </div>
@@ -168,10 +244,10 @@ export default function CategoriesPage() {
           
           {/* Recherche textuelle */}
           <div className="w-full md:w-1/2">
-            <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Recherche</label>
+            <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Rechercher une structure</label>
             <input
               type="text"
-              placeholder="Ex: Hôtel, Guide, Agence, Ministère..."
+              placeholder="Ex: Hôtel, Guide, Agence, Restaurant..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-500"
@@ -214,32 +290,24 @@ export default function CategoriesPage() {
                     }`}>
                       {item.type}
                     </span>
-                    <span className="text-xs font-medium text-gray-400">📍 {item.pole}</span>
                   </div>
 
                   <h3 className="text-lg font-bold text-blue-950 mb-2">
                     {item.nom}
                   </h3>
 
-                  <p className="text-xs text-gray-500 mb-4">
-                    ⏱️ Expérience : <strong className="text-gray-700">{item.anciennete}</strong>
+                  <p className="text-xs text-gray-500 mb-2">
+                    📍 Pôle : <strong className="text-gray-700">{item.pole}</strong>
                   </p>
 
-                  <div className="border-t border-gray-50 pt-3">
-                    <span className="text-[11px] font-bold text-gray-400 block mb-2">Outils digitaux utilisés :</span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {item.outils.map((outil, idx) => (
-                        <span key={idx} className="bg-slate-100 text-slate-700 text-[11px] px-2.5 py-1 rounded-md">
-                          {outil}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                  <p className="text-xs text-gray-500 mb-4">
+                    ⏱️ Ancienneté : <strong className="text-gray-700">{item.anciennete}</strong>
+                  </p>
                 </div>
 
-                <div className="mt-6 pt-3 border-t border-gray-100 flex justify-between items-center">
+                <div className="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
                   <span className="text-xs font-bold text-orange-500 hover:underline cursor-pointer">
-                    Consulter la fiche →
+                    Fiche établissement →
                   </span>
                 </div>
               </div>
@@ -248,8 +316,8 @@ export default function CategoriesPage() {
         ) : (
           <div className="text-center py-16 bg-white rounded-3xl border border-gray-100">
             <span className="text-4xl block mb-3">🔍</span>
-            <h3 className="text-lg font-bold text-blue-950">Aucun résultat trouvé</h3>
-            <p className="text-sm text-gray-500 mt-1">Essayez de modifier votre pôle ou votre terme de recherche.</p>
+            <h3 className="text-lg font-bold text-blue-950">Aucune structure trouvée</h3>
+            <p className="text-sm text-gray-500 mt-1">Essayez de modifier votre pôle ou votre mot-clé de recherche.</p>
           </div>
         )}
 
