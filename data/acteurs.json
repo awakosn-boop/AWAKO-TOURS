@@ -1,0 +1,102 @@
+[
+    {
+      "id": 1,
+      "nom": "Structure Publique du Tourisme (Issakhadiop95)",
+      "nature": "Public",
+      "nature_detail": "Structure parapublique",
+      "type": "Structure publique du tourisme",
+      "pole": "Pôle DAKAR (Dakar)",
+      "anciennete": "Plus de 6 ans",
+      "outils": ["Site web", "Facebook", "Instagram", "TikTok", "Plateforme de réservation", "E-mail professionnel"]
+    },
+    {
+      "id": 2,
+      "nom": "Guide Touristique (Savare75)",
+      "nature": "Privé",
+      "nature_detail": "Structure privée",
+      "type": "Guide touristique",
+      "pole": "Pôle DAKAR (Dakar)",
+      "anciennete": "Plus de 6 ans",
+      "outils": ["Facebook", "Instagram", "TikTok", "WhatsApp Business", "Plateforme de réservation"]
+    },
+    {
+      "id": 3,
+      "nom": "Structure Publique du Tourisme (Malickfall13)",
+      "nature": "Public",
+      "nature_detail": "Structure parapublique",
+      "type": "Structure publique du tourisme",
+      "pole": "Pôle DAKAR (Dakar)",
+      "anciennete": "Plus de 6 ans",
+      "outils": ["Site web", "Facebook", "Instagram", "TikTok", "E-mail professionnel"]
+    },
+    {
+      "id": 4,
+      "nom": "Guide Touristique (Diopcheikh923)",
+      "nature": "Privé",
+      "nature_detail": "Structure privée",
+      "type": "Guide touristique",
+      "pole": "Pôle DAKAR (Dakar)",
+      "anciennete": "3 à 6 ans",
+      "outils": ["Facebook", "WhatsApp Business", "E-mail professionnel"]
+    },
+    {
+      "id": 5,
+      "nom": "Guide Touristique (Goumbagoumba7)",
+      "nature": "Privé",
+      "nature_detail": "Structure privée",
+      "type": "Guide touristique",
+      "pole": "Pôle DAKAR (Dakar)",
+      "anciennete": "1 à 3 ans",
+      "outils": ["TikTok", "WhatsApp Business", "WhatsApp standard"]
+    },
+    {
+      "id": 6,
+      "nom": "Réserve Naturelle Communautaire de Palmarin",
+      "nature": "Public",
+      "nature_detail": "Reserve naturelle communautaire de Palmarin",
+      "type": "Site touristique / Parc national / Réserve naturelle",
+      "pole": "Pôle CENTRE ( Fatick, Kaolack, Kaffrine)",
+      "anciennete": "Plus de 6 ans",
+      "outils": ["Site web", "Facebook", "WhatsApp Business", "Plateforme de réservation"]
+    },
+    {
+      "id": 7,
+      "nom": "Hôtel - Pôle Thiès (Fallou97)",
+      "nature": "Privé",
+      "nature_detail": "Structure privée",
+      "type": "Hôtel",
+      "pole": "Pôle THIES (Thies)",
+      "anciennete": "Plus de 6 ans",
+      "outils": ["Site web", "Facebook", "Instagram", "Plateforme de réservation"]
+    },
+    {
+      "id": 8,
+      "nom": "Agence de Voyage / Tour Opérateur (Senebalde)",
+      "nature": "Privé",
+      "nature_detail": "Structure privée",
+      "type": "Agence de voyage / Tour opérateur",
+      "pole": "Pôle DAKAR (Dakar)",
+      "anciennete": "Plus de 6 ans",
+      "outils": ["Site web", "Facebook", "Instagram", "LinkedIn", "E-mail professionnel"]
+    },
+    {
+      "id": 9,
+      "nom": "Campement / Ecolodge (Saloum Evasion)",
+      "nature": "Privé",
+      "nature_detail": "Structure privée",
+      "type": "Campement / Ecolodge",
+      "pole": "Pôle CENTRE ( Fatick, Kaolack, Kaffrine)",
+      "anciennete": "Plus de 6 ans",
+      "outils": ["Site web", "Facebook", "Instagram", "WhatsApp Business"]
+    },
+    {
+      "id": 10,
+      "nom": "Agence Sénégalaise de Promotion Touristique (ASPT)",
+      "nature": "Public",
+      "nature_detail": "Structure publique",
+      "type": "Agence sénégalaise de promotion touristique",
+      "pole": "Pôle DAKAR (Dakar)",
+      "anciennete": "Plus de 6 ans",
+      "outils": ["Site web", "Facebook", "Instagram", "Twitter / X", "LinkedIn", "YouTube", "TikTok"]
+    }
+  ]
