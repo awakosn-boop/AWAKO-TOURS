@@ -70,9 +70,16 @@ const POLES_DATA: Record<string, Pole> = {
     name: 'Pôle Nord (Saint-Louis)',
     regions: 'Saint-Louis',
     departments: ['Saint-Louis', 'Dagana', 'Podor'],
-    description: 'Patrimoine UNESCO, Parc du Djoudj et Fleuve Sénégal.',
+    description: 'Patrimoine UNESCO, Parc du Djoudj, Ile de Saint-Louis et Fleuve Sénégal.',
     color: '#fffe3a',
-    gallery: [],
+    gallery: [
+      '/saintlouisPont.jpg',
+      '/saintlouis.jpg',
+      '/saintlouisILE.jpg',
+      '/saintlouis2.jpg',
+      '/saintlouisDjoudj.jpg',
+      '/saintlouisArchitecture.jpg',
+    ],
     lat: 16.0326,
     lng: -16.4818,
   },
@@ -83,7 +90,10 @@ const POLES_DATA: Record<string, Pole> = {
     departments: ['Matam', 'Kanel', 'Ranérou Ferlo'],
     description: 'Le Fouta pastoral, les berges du fleuve et le Ferlo.',
     color: '#0a9af5',
-    gallery: [],
+    gallery: [
+      '/matamFleuve.jpg',
+      '/matamFerlo.jpg',
+    ],
     lat: 15.6559,
     lng: -13.2554,
   },
@@ -94,7 +104,10 @@ const POLES_DATA: Record<string, Pole> = {
     departments: ['Louga', 'Linguère', 'Kébémer', 'Diourbel', 'Bambey', 'Mbacké'],
     description: 'Désert de Lompoul, cité sainte de Touba et le Djolof.',
     color: '#f50c0c',
-    gallery: [],
+    gallery: [
+      '/lompoulDesert.jpg',
+      '/toubaMosquee.jpg',
+    ],
     lat: 15.6187,
     lng: -15.5418,
   },
@@ -105,7 +118,10 @@ const POLES_DATA: Record<string, Pole> = {
     departments: ['Fatick', 'Foundiougne', 'Gossas', 'Kaolack', 'Nioro du Rip', 'Guinguinéo', 'Kaffrine', 'Birkelane', 'Koungheul', 'Malem Hodar'],
     description: 'Delta du Sine Saloum, mangroves et îles.',
     color: '#003dd7',
-    gallery: [],
+    gallery: [
+      '/saloumDelta.jpg',
+      '/saloumMangrove.jpg',
+    ],
     lat: 14.1504,
     lng: -16.0730,
   },
@@ -134,7 +150,11 @@ const POLES_DATA: Record<string, Pole> = {
     departments: ['Ziguinchor', 'Bignona', 'Oussouye', 'Sédhiou', 'Bounkiling', 'Goudomp', 'Kolda', 'Vélingara', 'Médina Yoro Foulah'],
     description: 'Casamance : Cap Skirring, bolongs et traditions.',
     color: '#f5960a',
-    gallery: [],
+    gallery: [
+      '/capSkirringPlage.jpg',
+      '/casamanceCapskirring.jpg',
+      '/casamanceBolongs.jpg',
+    ],
     lat: 12.5833,
     lng: -16.2719,
   },
@@ -146,14 +166,14 @@ const DISCOVER_ITEMS = [
     title: 'Patrimoine & Sites UNESCO',
     category: 'Histoire',
     icon: '🏛️',
-    description: 'Maison des Esclaves à Gorée, architecture coloniale de Saint-Louis, Pays Bassari et sites mégalithiques.',
+    description: 'Maison des Esclaves à Gorée, architecture coloniale et pont de Saint-Louis, Pays Bassari et sites mégalithiques.',
     tag: 'Culture & Mémoire',
-    targetPole: 'dakar', // Pôle principal lié
+    targetPole: 'dakar',
     targetCategory: 'Patrimoine',
     previewPhotos: [
       '/dakarIleGOREEMaison.jpg',
-      '/dakarMonuRenaiss.jpg',
-      '/kedougoubassari.jpg'
+      '/saintlouisPont.jpg',
+      '/saintlouisILE.jpg'
     ],
     associatedPoles: ['Pôle Dakar', 'Pôle Nord (Saint-Louis)', 'Pôle Sud-Est (Kédougou)'],
   },
@@ -199,182 +219,53 @@ const DISCOVER_ITEMS = [
     targetCategory: 'Nature',
     previewPhotos: [
       '/tambaniokolodge.jpg',
-      '/kedougouCascadeDindefelo.jpg',
-      '/kedougouCascadeInguili.jpg'
+      '/tambaniokolodge2.jpg',
+      '/kedougouCascadeDindefelo.jpg'
     ],
     associatedPoles: ['Pôle Sud-Est (Tambacounda/Kédougou)', 'Pôle Centre', 'Pôle Nord'],
   },
 ];
 
 const GALLERY_ITEMS: GalleryItem[] = [
-  { 
-    id: 1, 
-    title: 'Monument de la Renaissance', 
-    categories: ['Patrimoine', 'Sites Historiques'], 
-    location: 'Dakar', 
-    image: '/dakarMonuRenaiss.jpg' 
-  },
-  { 
-    id: 2, 
-    title: 'Maison des Esclaves', 
-    categories: ['Patrimoine', 'Îles', 'Sites Historiques'], 
-    location: 'Gorée (Dakar)', 
-    image: '/dakarIleGOREEMaison.jpg' 
-  },
-  { 
-    id: 3, 
-    title: 'Vue Aérienne de Gorée', 
-    categories: ['Îles', 'Patrimoine', 'Plages'], 
-    location: 'Gorée (Dakar)', 
-    image: '/dakarIlegoree.jpg' 
-  },
-  { 
-    id: 4, 
-    title: 'Plage de Gorée', 
-    categories: ['Plages', 'Îles'], 
-    location: 'Gorée (Dakar)', 
-    image: '/dakarPlageGOREE.jpg' 
-  },
-  { 
-    id: 5, 
-    title: 'Ruelle Colorée de Gorée', 
-    categories: ['Patrimoine', 'Îles', 'Culture'], 
-    location: 'Gorée (Dakar)', 
-    image: '/dakarRueGOREE.jpg' 
-  },
-  { 
-    id: 6, 
-    title: 'Île de Ngor', 
-    categories: ['Îles', 'Plages', 'Nature'], 
-    location: 'Dakar', 
-    image: '/dakarIleNgor.jpg' 
-  },
-  { 
-    id: 7, 
-    title: 'Lac Rose', 
-    categories: ['Nature', 'Sites Historiques'], 
-    location: 'Dakar', 
-    image: '/dakarLacRose.jpg' 
-  },
-  { 
-    id: 8, 
-    title: 'Mosquée de la Divinité & Corniche', 
-    categories: ['Patrimoine', 'Plages', 'Sites Historiques'], 
-    location: 'Dakar', 
-    image: '/dakarMosqueDivCORNICHE.jpg' 
-  },
-  { 
-    id: 9, 
-    title: 'Marché Kermel', 
-    categories: ['Culture', 'Patrimoine'], 
-    location: 'Dakar', 
-    image: '/dakarKermel.jpg' 
-  },
-  { 
-    id: 10, 
-    title: 'Marché Pittoresque', 
-    categories: ['Culture'], 
-    location: 'Dakar', 
-    image: '/dakarMarche.jpg' 
-  },
-  { 
-    id: 11, 
-    title: 'Joal-Fadiouth', 
-    categories: ['Patrimoine', 'Culture', 'Sites Historiques'], 
-    location: 'Thiès', 
-    image: '/thiesJoal.jpg' 
-  },
-  { 
-    id: 12, 
-    title: 'Île aux Coquillages (Joal)', 
-    categories: ['Patrimoine', 'Îles', 'Culture'], 
-    location: 'Thiès', 
-    image: '/thiesJoal2.jpg' 
-  },
-  { 
-    id: 13, 
-    title: 'Station Balnéaire & Plage Palm Beach', 
-    categories: ['Plages'], 
-    location: 'Saly (Thiès)', 
-    image: '/thiesPalmbeach.jpg' 
-  },
-  { 
-    id: 14, 
-    title: 'Lagune de Somone', 
-    categories: ['Nature', 'Plages'], 
-    location: 'Somone (Thiès)', 
-    image: '/thiesLagune.jpg' 
-  },
-  { 
-    id: 15, 
-    title: 'Réserve Naturelle de la Lagune', 
-    categories: ['Nature', 'Plages'], 
-    location: 'Somone (Thiès)', 
-    image: '/thieslagunesomone.jpg' 
-  },
-  { 
-    id: 16, 
-    title: 'Réserve de Bandia', 
-    categories: ['Nature'], 
-    location: 'Thiès', 
-    image: '/thiesBandia.jpg' 
-  },
-  { 
-    id: 17, 
-    title: 'Paysage de Baobabs', 
-    categories: ['Nature'], 
-    location: 'Thiès', 
-    image: '/thies.jpg' 
-  },
-  { 
-    id: 18, 
-    title: 'Église de Joal-Fadiouth', 
-    categories: ['Patrimoine', 'Culture', 'Sites Historiques'], 
-    location: 'Thiès', 
-    image: '/thiesEglise.jpg' 
-  },
-  { 
-    id: 19, 
-    title: 'Cascade de Dindéfélo', 
-    categories: ['Nature', 'Sites Historiques'], 
-    location: 'Kédougou', 
-    image: '/kedougouCascadeDindefelo.jpg' 
-  },
-  { 
-    id: 20, 
-    title: 'Cascade d\'Inguili', 
-    categories: ['Nature'], 
-    location: 'Kédougou', 
-    image: '/kedougouCascadeInguili.jpg' 
-  },
-  { 
-    id: 21, 
-    title: 'Pays Bassari & Traditions', 
-    categories: ['Culture', 'Patrimoine', 'Sites Historiques'], 
-    location: 'Kédougou', 
-    image: '/kedougoubassari.jpg' 
-  },
-  { 
-    id: 22, 
-    title: 'Niokolo Lodge - Vue Fleuve', 
-    categories: ['Nature', 'Sites Historiques'], 
-    location: 'Tambacounda (Niokolo-Koba)', 
-    image: '/tambaniokolodge.jpg' 
-  },
-  { 
-    id: 23, 
-    title: 'Niokolo Lodge - Hébergement & Safari', 
-    categories: ['Nature', 'Culture'], 
-    location: 'Tambacounda (Niokolo-Koba)', 
-    image: '/tambaniokolodge2.jpg' 
-  },
-  { 
-    id: 24, 
-    title: 'Niokolo Lodge - Écotourisme', 
-    categories: ['Nature'], 
-    location: 'Tambacounda (Niokolo-Koba)', 
-    image: '/tambaniokolodge3.png' 
-  },
+  { id: 1, title: 'Monument de la Renaissance', categories: ['Patrimoine', 'Sites Historiques'], location: 'Dakar', image: '/dakarMonuRenaiss.jpg' },
+  { id: 2, title: 'Maison des Esclaves', categories: ['Patrimoine', 'Îles', 'Sites Historiques'], location: 'Gorée (Dakar)', image: '/dakarIleGOREEMaison.jpg' },
+  { id: 3, title: 'Vue Aérienne de Gorée', categories: ['Îles', 'Patrimoine', 'Plages'], location: 'Gorée (Dakar)', image: '/dakarIlegoree.jpg' },
+  { id: 4, title: 'Plage de Gorée', categories: ['Plages', 'Îles'], location: 'Gorée (Dakar)', image: '/dakarPlageGOREE.jpg' },
+  { id: 5, title: 'Ruelle Colorée de Gorée', categories: ['Patrimoine', 'Îles', 'Culture'], location: 'Gorée (Dakar)', image: '/dakarRueGOREE.jpg' },
+  { id: 6, title: 'Île de Ngor', categories: ['Îles', 'Plages', 'Nature'], location: 'Dakar', image: '/dakarIleNgor.jpg' },
+  { id: 7, title: 'Lac Rose', categories: ['Nature', 'Sites Historiques'], location: 'Dakar', image: '/dakarLacRose.jpg' },
+  { id: 8, title: 'Mosquée de la Divinité & Corniche', categories: ['Patrimoine', 'Plages', 'Sites Historiques'], location: 'Dakar', image: '/dakarMosqueDivCORNICHE.jpg' },
+  { id: 9, title: 'Marché Kermel', categories: ['Culture', 'Patrimoine'], location: 'Dakar', image: '/dakarKermel.jpg' },
+  { id: 10, title: 'Marché Pittoresque', categories: ['Culture'], location: 'Dakar', image: '/dakarMarche.jpg' },
+  { id: 11, title: 'Joal-Fadiouth', categories: ['Patrimoine', 'Culture', 'Sites Historiques'], location: 'Thiès', image: '/thiesJoal.jpg' },
+  { id: 12, title: 'Île aux Coquillages (Joal)', categories: ['Patrimoine', 'Îles', 'Culture'], location: 'Thiès', image: '/thiesJoal2.jpg' },
+  { id: 13, title: 'Station Balnéaire & Plage Palm Beach', categories: ['Plages'], location: 'Saly (Thiès)', image: '/thiesPalmbeach.jpg' },
+  { id: 14, title: 'Lagune de Somone', categories: ['Nature', 'Plages'], location: 'Somone (Thiès)', image: '/thiesLagune.jpg' },
+  { id: 15, title: 'Réserve Naturelle de la Lagune', categories: ['Nature', 'Plages'], location: 'Somone (Thiès)', image: '/thieslagunesomone.jpg' },
+  { id: 16, title: 'Réserve de Bandia', categories: ['Nature'], location: 'Thiès', image: '/thiesBandia.jpg' },
+  { id: 17, title: 'Paysage de Baobabs', categories: ['Nature'], location: 'Thiès', image: '/thies.jpg' },
+  { id: 18, title: 'Église de Joal-Fadiouth', categories: ['Patrimoine', 'Culture', 'Sites Historiques'], location: 'Thiès', image: '/thiesEglise.jpg' },
+  { id: 19, title: 'Cascade de Dindéfélo', categories: ['Nature', 'Sites Historiques'], location: 'Kédougou', image: '/kedougouCascadeDindefelo.jpg' },
+  { id: 20, title: 'Cascade d\'Inguili', categories: ['Nature'], location: 'Kédougou', image: '/kedougouCascadeInguili.jpg' },
+  { id: 21, title: 'Pays Bassari & Traditions', categories: ['Culture', 'Patrimoine', 'Sites Historiques'], location: 'Kédougou', image: '/kedougoubassari.jpg' },
+  { id: 22, title: 'Niokolo Lodge - Vue Fleuve', categories: ['Nature', 'Sites Historiques'], location: 'Tambacounda (Niokolo-Koba)', image: '/tambaniokolodge.jpg' },
+  { id: 23, title: 'Niokolo Lodge - Hébergement & Safari', categories: ['Nature', 'Culture'], location: 'Tambacounda (Niokolo-Koba)', image: '/tambaniokolodge2.jpg' },
+  { id: 24, title: 'Niokolo Lodge - Écotourisme', categories: ['Nature'], location: 'Tambacounda (Niokolo-Koba)', image: '/tambaniokolodge3.png' },
+  { id: 25, title: 'Pont Faidherbe', categories: ['Patrimoine', 'Sites Historiques'], location: 'Saint-Louis', image: '/saintlouisPont.jpg' },
+  { id: 26, title: 'Bateaux sur le Fleuve Sénégal', categories: ['Nature', 'Culture'], location: 'Saint-Louis', image: '/saintlouis.jpg' },
+  { id: 27, title: 'Île de Saint-Louis', categories: ['Îles', 'Patrimoine', 'Sites Historiques'], location: 'Saint-Louis', image: '/saintlouisILE.jpg' },
+  { id: 28, title: 'Paysage & Charme de Saint-Louis', categories: ['Patrimoine', 'Culture'], location: 'Saint-Louis', image: '/saintlouis2.jpg' },
+  { id: 29, title: 'Parc National des Oiseaux du Djoudj', categories: ['Nature'], location: 'Saint-Louis', image: '/saintlouisDjoudj.jpg' },
+  { id: 30, title: 'Architecture Coloniale', categories: ['Patrimoine', 'Culture'], location: 'Saint-Louis', image: '/saintlouisArchitecture.jpg' },
+  { id: 31, title: 'Fleuve Sénégal', categories: ['Nature'], location: 'Matam', image: '/matamFleuve.jpg' },
+  { id: 32, title: 'Paysage du Ferlo', categories: ['Nature'], location: 'Matam', image: '/matamFerlo.jpg' },
+  { id: 33, title: 'Désert de Lompoul', categories: ['Nature'], location: 'Louga', image: '/lompoulDesert.jpg' },
+  { id: 34, title: 'Grande Mosquée de Touba', categories: ['Patrimoine', 'Sites Historiques', 'Culture'], location: 'Diourbel', image: '/toubaMosquee.jpg' },
+  { id: 35, title: 'Delta du Sine Saloum', categories: ['Nature', 'Îles'], location: 'Fatick / Kaolack', image: '/saloumDelta.jpg' },
+  { id: 36, title: 'Mangroves du Saloum', categories: ['Nature'], location: 'Fatick', image: '/saloumMangrove.jpg' },
+  { id: 37, title: 'Plages de Cap Skirring', categories: ['Plages', 'Nature'], location: 'Ziguinchor (Casamance)', image: '/capSkirringPlage.jpg' },
+  { id: 38, title: 'Plage du Cap Skirring', categories: ['Plages', 'Nature'], location: 'Cap Skirring (Casamance)', image: '/casamanceCapskirring.jpg' },
+  { id: 39, title: 'Bolongs de Casamance', categories: ['Nature', 'Îles'], location: 'Casamance', image: '/casamanceBolongs.jpg' },
 ];
 
 const ALBUM_CATEGORIES = [
@@ -423,7 +314,6 @@ export default function SenegalTouristPage() {
     setCurrentImageIndex(0);
   };
 
-  // Clic sur une carte thématique : sélectionne le pôle et défile vers la carte
   const handleDiscoverCardClick = (poleId: string) => {
     setSelectedPoleId(poleId);
     setCurrentImageIndex(0);
@@ -572,7 +462,7 @@ export default function SenegalTouristPage() {
         </div>
       </section>
 
-      {/* 2. SECTION DÉCOUVRIR LE SÉNÉGAL (AVEC LIENS DIRECTS AUX PHOTOS & PÔLES) */}
+      {/* 2. SECTION DÉCOUVRIR LE SÉNÉGAL */}
       <section id="decouvrir" className="max-w-7xl mx-auto px-4 py-16 border-t border-gray-100">
         
         <div className="text-center mb-10">
@@ -857,37 +747,12 @@ export default function SenegalTouristPage() {
               </li>
               <li>
                 <button onClick={() => scrollToSection('decouvrir')} className="hover:text-orange-400 transition">
-                  Découvrir
+                  Découvrir le Sénégal
                 </button>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-sm font-bold text-orange-400 uppercase tracking-wider mb-4">
-              Pôles Principaux
-            </h4>
-            <ul className="space-y-2.5 text-sm text-gray-300">
-              <li><button onClick={() => handleSelectPole('dakar')} className="hover:text-orange-400 transition">Pôle Dakar</button></li>
-              <li><button onClick={() => handleSelectPole('thies')} className="hover:text-orange-400 transition">Pôle Thiès</button></li>
-              <li><button onClick={() => handleSelectPole('sud_est')} className="hover:text-orange-400 transition">Pôle Sud-Est</button></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-sm font-bold text-orange-400 uppercase tracking-wider mb-4">
-              Contact
-            </h4>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              Ministère du Tourisme et de l'Artisanat<br />
-              Dakar, Sénégal
-            </p>
-          </div>
-
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 pt-8 border-t border-blue-900 text-center text-xs text-gray-400">
-          © {new Date().getFullYear()} Tourisme Sénégal. Tous droits réservés.
         </div>
       </footer>
 
