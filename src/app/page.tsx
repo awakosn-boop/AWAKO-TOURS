@@ -9,11 +9,11 @@ import Image from 'next/image';
 export default function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Fonction de défilement fluide vers la carte
-  const scrollToPoles = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  // Fonction de défilement fluide vers la carte interactive (2ème section)
+  const scrollToCarte = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setIsMenuOpen(false); // Ferme le menu mobile lors du clic
-    const element = document.getElementById('poles');
+    const element = document.getElementById('carte-interactive');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -43,8 +43,8 @@ export default function HomePage() {
           {/* Menu de Navigation Ordinateur */}
           <div className="hidden md:flex items-center gap-8 text-base font-medium text-gray-600">
             <Link href="/" className="text-orange-500 font-bold border-b-2 border-orange-500 pb-1">Accueil</Link>
-            <a href="#poles" onClick={scrollToPoles} className="hover:text-orange-500 transition duration-200">Explorer la carte</a>
-            <a href="#poles" onClick={scrollToPoles} className="hover:text-orange-500 transition duration-200">Pôles touristiques</a>
+            <a href="#carte-interactive" onClick={scrollToCarte} className="hover:text-orange-500 transition duration-200">Explorer la carte</a>
+            <a href="#carte-interactive" onClick={scrollToCarte} className="hover:text-orange-500 transition duration-200">Pôles touristiques</a>
             <Link href="/categories" className="hover:text-orange-500 transition duration-200">Catégories</Link>
           </div>
 
@@ -71,10 +71,10 @@ export default function HomePage() {
             <Link href="/" onClick={() => setIsMenuOpen(false)} className="text-orange-500 font-bold">
               Accueil
             </Link>
-            <a href="#poles" onClick={scrollToPoles} className="hover:text-orange-500 transition">
+            <a href="#carte-interactive" onClick={scrollToCarte} className="hover:text-orange-500 transition">
               Explorer la carte
             </a>
-            <a href="#poles" onClick={scrollToPoles} className="hover:text-orange-500 transition">
+            <a href="#carte-interactive" onClick={scrollToCarte} className="hover:text-orange-500 transition">
               Pôles touristiques
             </a>
             <Link href="/categories" onClick={() => setIsMenuOpen(false)} className="hover:text-orange-500 transition">
@@ -84,15 +84,20 @@ export default function HomePage() {
         )}
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative pt-48 pb-20 md:pt-64 md:pb-32 flex items-center justify-center text-white overflow-hidden min-h-[80vh]">
-        {/* Image locale depuis le dossier /public/image1accueil.jpg */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500"
-          style={{ backgroundImage: `url('/image1accueil.jpg')` }}
-        />
+      {/* 1ère Section : Hero Section */}
+      <section className="relative pt-60 pb-32 md:pt-80 md:pb-48 flex items-center justify-center text-white overflow-hidden min-h-[110vh] md:min-h-[1200px]">
+        {/* Calage strict sur le BAS de l'image (object-bottom) pour masquer le trop-plein de ciel orange en haut */}
+        <div className="absolute inset-0">
+          <Image
+            src="/image1accueil.jpg"
+            alt="AWAKO TOURS Baobab"
+            fill
+            priority
+            className="object-cover object-bottom"
+          />
+        </div>
         
-        {/* Voile dégradé sombre pour faire ressortir parfaitement le texte */}
+        {/* Voile dégradé sombre pour la lisibilité du texte */}
         <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-950/70 to-black/50" />
         
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
@@ -109,8 +114,8 @@ export default function HomePage() {
           </p>
           
           <a
-            href="#poles"
-            onClick={scrollToPoles}
+            href="#carte-interactive"
+            onClick={scrollToCarte}
             className="inline-flex items-center px-8 py-4 rounded-full bg-orange-500 text-white font-bold text-base hover:bg-orange-600 transition duration-300 shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5"
           >
             Explorer la carte
@@ -118,8 +123,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Section Vraie Carte Interactive */}
-      <section id="poles" className="py-20 px-6 bg-gray-50 scroll-mt-28">
+      {/* 2ème Section : Vraie Carte Interactive */}
+      <section id="carte-interactive" className="py-20 px-6 bg-gray-50 scroll-mt-28">
         <div className="max-w-7xl mx-auto">
           <RealSenegalMap /> 
         </div>
